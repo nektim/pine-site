@@ -1,0 +1,458 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #f1f5e9;
+  color: #2d3e1f;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  background: #1e3b20;
+  color: white;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #e0f2c7;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.nav-links a:hover {
+  background: #2d5a2c;
+}
+
+.hero {
+  background: url('image/back-ground-image/pine-forest.jpeg') center/cover no-repeat;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  color: white;
+  padding: 60px 0;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 20, 0, 0.6);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.order-box {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  color: #1e3b20;
+  padding: 30px 25px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  width: 340px;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+
+.order-box h3 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  color: #1e3b20;
+  text-align: center;
+}
+
+.order-box input, .order-box button {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #c7d9b7;
+  font-size: 1rem;
+  outline: none;
+}
+
+.order-box input:focus {
+  border-color: #2d5a2c;
+  box-shadow: 0 0 0 3px rgba(45,90,44,0.2);
+}
+
+/* Обёртка автодополнения – только для главной формы */
+.autocomplete-wrapper {
+  position: relative;
+}
+
+.autocomplete-wrapper input {
+  margin-bottom: 0;
+  padding-right: 50px; /* место для кнопки ▼ */
+}
+
+.autocomplete-wrapper .dropdown-btn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  bottom: 5px;
+  width: 40px;
+  background: #e0f2c7;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e3b20;
+  margin-bottom: 0;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #c7d9b7;
+  border-radius: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 20;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  display: none;
+  margin-top: 4px;
+}
+
+.dropdown-list.active {
+  display: block;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.dropdown-item:hover {
+  background: #e9f5db;
+}
+
+.order-box button[type="submit"] {
+  background: #f4a261;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+.order-box button[type="submit"]:hover {
+  background: #e08b4b;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.hero-text h1 {
+  font-size: 2.8rem;
+  margin-bottom: 25px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+}
+
+.advantages {
+  list-style: none;
+  font-size: 1.2rem;
+}
+
+.advantages li {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.advantages li::before {
+  content: "🌲";
+  font-size: 1.5rem;
+}
+
+.section {
+  padding: 60px 0;
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  color: #1e3b20;
+}
+
+.filters {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  align-items: center;
+  background: #e0f2c7;
+  padding: 15px 20px;
+  border-radius: 15px;
+}
+
+.filters select, .filters button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #b7c99e;
+  background: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.catalog-grid, .exclusive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.product-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  background: #d9e6cf;
+}
+
+.product-info {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.product-info .age {
+  color: #6b8c5c;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.product-info .price {
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #c35e2b;
+  margin-top: auto;
+}
+
+.exclusive-card .image-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #f4f9ee;
+}
+
+.image-tab {
+  padding: 5px 12px;
+  background: #d9e6cf;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.image-tab.active {
+  background: #2d5a2c;
+  color: white;
+}
+
+.care-tips {
+  padding: 15px 20px;
+  background: #f9fff5;
+  font-size: 0.9rem;
+  border-top: 1px solid #d9e6cf;
+}
+
+.care-tips strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.exclusive-card .order-btn {
+  margin: 15px 20px 20px;
+  padding: 12px;
+  background: #f4a261;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.exclusive-card .order-btn:hover {
+  background: #e08b4b;
+}
+
+/* Модальные окна */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #666;
+  z-index: 10;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+.modal-content input, .modal-content button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #c7d9b7;
+  font-size: 1rem;
+}
+
+/* Стили для текста внутри модалки возврата (переопределять не нужно, заданы в HTML инлайн) */
+
+.footer {
+  background: #1e3b20;
+  color: #e0f2c7;
+  padding: 40px 0 20px;
+  margin-top: 40px;
+}
+
+.footer .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.footer h4 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #4a6b3a;
+  padding-bottom: 8px;
+}
+
+.footer p, .footer li {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .hero .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .order-box {
+    width: 100%;
+  }
+}

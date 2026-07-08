@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>Сосновый Рай — саженцы сосен</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="#" class="logo">🌲 Сосновый Рай</a>
+      <nav class="nav-links">
+        <a href="#home">Главная</a>
+        <a href="#catalog">Каталог</a>
+        <a href="#exclusive">Эксклюзивные</a>
+        <a href="#footer">Контакты</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Главная секция -->
+    <section id="home" class="hero">
+      <div class="container">
+        <!-- Форма заявки слева -->
+        <div class="order-box">
+          <h3>Заявка на покупку</h3>
+          <form id="mainOrderForm" onsubmit="handleMainSubmit(event)">
+            <input type="text" placeholder="Имя и фамилия" required>
+            <input type="tel" placeholder="Номер телефона" required>
+            <div class="autocomplete-wrapper" id="autocompleteMain">
+              <input type="text" id="sazenecInput" placeholder="Название саженца" autocomplete="off" required>
+              <button type="button" class="dropdown-btn" id="dropdownToggleBtn">▼</button>
+              <div class="dropdown-list" id="dropdownList"></div>
+            </div>
+            <button type="submit">Отправить</button>
+          </form>
+        </div>
+        <!-- Текст с достоинствами справа -->
+        <div class="hero-text">
+          <h1>Саженцы сосен<br>прямо из питомника</h1>
+          <ul class="advantages">
+            <li>100% приживаемость — гарантия 12 месяцев</li>
+            <li>Бесплатная доставка от 5 000 ₽</li>
+            <li>Редкие и коллекционные сорта</li>
+            <li>Помощь агронома 24/7</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Каталог товаров -->
+    <section id="catalog" class="section">
+      <div class="container">
+        <h2>Каталог саженцев</h2>
+        <div class="filters">
+          <select id="filterType">
+            <option value="all">Все виды</option>
+            <option value="обыкновенная">Сосна обыкновенная</option>
+            <option value="горная">Сосна горная</option>
+            <option value="кедровая">Сосна кедровая</option>
+            <option value="черная">Сосна черная</option>
+          </select>
+          <select id="filterAge">
+            <option value="all">Любой возраст</option>
+            <option value="1">1 год</option>
+            <option value="2">2 года</option>
+            <option value="3">3 года</option>
+          </select>
+          <select id="sortSelect">
+            <option value="default">По умолчанию</option>
+            <option value="priceAsc">Цена: по возрастанию</option>
+            <option value="priceDesc">Цена: по убыванию</option>
+            <option value="nameAsc">Название А-Я</option>
+            <option value="nameDesc">Название Я-А</option>
+          </select>
+        </div>
+        <div class="catalog-grid" id="catalogGrid"></div>
+      </div>
+    </section>
+
+    <!-- Эксклюзивные саженцы -->
+    <section id="exclusive" class="section">
+      <div class="container">
+        <h2>✨ Эксклюзивные саженцы</h2>
+        <div class="exclusive-grid" id="exclusiveGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Подвал -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div>
+        <h4>Контакты</h4>
+        <p>📞 +7 (999) 123-45-67</p>
+        <p>✉️ zakaz@sosnovy-rai.ru</p>
+        <p>📍 Московская обл., питомник "Лесное"</p>
+      </div>
+      <div>
+        <h4>Доставка</h4>
+        <p>🚚 Доставка по всей России</p>
+        <p>📦 Сроки: 2–7 дней</p>
+        <p>🔄 Возврат и обмен в течение 30 дней</p>
+        <p>Подробнее: <a href="#" id="returnLink" style="color:#e0f2c7;">условия возврата</a></p>
+      </div>
+      <div>
+        <h4>О нас</h4>
+        <p>🌱 Питомник «Сосновый Рай» выращивает саженцы сосен более 15 лет. Мы используем только экологичные технологии и гарантируем качество каждого деревца.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Модальное окно заказа (для эксклюзивных) -->
+  <div class="modal" id="orderModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeModalBtn">&times;</button>
+      <h3 style="margin-bottom:20px;">Быстрый заказ</h3>
+      <form id="modalOrderForm" onsubmit="handleModalSubmit(event)">
+        <input type="text" id="modalName" placeholder="Имя и фамилия" required>
+        <input type="tel" id="modalPhone" placeholder="Номер телефона" required>
+        <!-- Убрана обёртка autocomplete, кнопка и список. Поле осталось простым -->
+        <input type="text" id="modalSazenec" placeholder="Саженец" required>
+        <button type="submit" style="background:#f4a261; color:white; font-weight:bold;">Отправить заявку</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Модальное окно: Условия возврата -->
+  <div class="modal" id="returnModal">
+    <div class="modal-content">
+      <button class="close-btn" id="closeReturnModalBtn">&times;</button>
+      <h3 style="margin-bottom:20px;">Условия возврата и обмена</h3>
+      <div style="font-size:0.95rem; line-height:1.6;">
+        <p><strong>🌲 Возврат саженцев</strong></p>
+        <p>Вы можете вернуть саженцы в течение 30 дней с момента покупки при следующих условиях:</p>
+        <ul style="margin-left:20px; margin-bottom:15px;">
+          <li>Растение не имеет механических повреждений, вызванных покупателем.</li>
+          <li>Сохранены оригинальные бирки и упаковка.</li>
+          <li>Саженец не высаживался в открытый грунт (для горшечных растений).</li>
+        </ul>
+        <p><strong>🔄 Обмен</strong></p>
+        <p>Обмен возможен на аналогичный товар либо на другой сорт с перерасчётом стоимости. Доставка при обмене оплачивается покупателем.</p>
+        <p><strong>💰 Возврат денег</strong></p>
+        <p>Деньги возвращаются в течение 10 рабочих дней после получения и проверки возвращённого товара. Способ возврата — на карту или наличными в питомнике.</p>
+        <p><strong>📞 Контакты для возврата</strong></p>
+        <p>Телефон: +7 (999) 123-45-67<br>Email: zakaz@sosnovy-rai.ru</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно "Успешно" -->
+  <div class="modal" id="successModal">
+      <div class="modal-content">
+          <button class="close-btn" id="closeSuccessModalBtn">&times;</button>
+          <h3 style="color:#1e3b20; margin-bottom:20px;">✅ Заявка отправлена!</h3>
+          <p>Ваша заявка успешно сохранена. Наш менеджер свяжется с вами в ближайшее время.</p>
+          <p style="margin-top:15px;">
+              <a href="view_orders.php" style="color:#2d5a2c; font-weight:bold; text-decoration:underline;">Посмотреть все заявки</a>
+          </p>
+      </div>
+  </div>
+
+  <script src="javascript.js"></script>
+</body>
+</html>
