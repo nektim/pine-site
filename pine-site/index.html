@@ -28,7 +28,6 @@
           <h3>Заявка на покупку</h3>
           <form id="mainOrderForm" onsubmit="handleMainSubmit(event)">
             <input type="text" placeholder="Имя и фамилия" required>
-            <input type="tel" placeholder="Номер телефона" required>
             <div class="autocomplete-wrapper" id="autocompleteMain">
               <input type="text" id="sazenecInput" placeholder="Название саженца" autocomplete="off" required>
               <button type="button" class="dropdown-btn" id="dropdownToggleBtn">▼</button>
@@ -119,7 +118,6 @@
       <h3 style="margin-bottom:20px;">Быстрый заказ</h3>
       <form id="modalOrderForm" onsubmit="handleModalSubmit(event)">
         <input type="text" id="modalName" placeholder="Имя и фамилия" required>
-        <input type="tel" id="modalPhone" placeholder="Номер телефона" required>
         <!-- Убрана обёртка autocomplete, кнопка и список. Поле осталось простым -->
         <input type="text" id="modalSazenec" placeholder="Саженец" required>
         <button type="submit" style="background:#f4a261; color:white; font-weight:bold;">Отправить заявку</button>
