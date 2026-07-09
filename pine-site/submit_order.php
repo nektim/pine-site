@@ -25,18 +25,11 @@ $input = json_decode(file_get_contents('php://input'), true);
 // Валидация полей
 $errors = [];
 $name = trim($input['name'] ?? '');
-$phone = trim($input['phone'] ?? '');
 $sazhenec = trim($input['sazhenec'] ?? '');
 $type = $input['type'] ?? 'обычная'; // 'обычная' или 'эксклюзивная'
 
 if ($name === '') {
     $errors[] = 'Имя обязательно';
-}
-if ($phone === '') {
-    $errors[] = 'Телефон обязателен';
-} elseif (!preg_match('/^\+?[0-9\s\-()]{7,20}$/', $phone)) {
-    // Простая проверка: только цифры, пробелы, скобки, минус, плюс
-    $errors[] = 'Некорректный формат телефона';
 }
 if ($sazhenec === '') {
     $errors[] = 'Название саженца обязательно';
@@ -52,11 +45,14 @@ if (!empty($errors)) {
 }
 
 // Защита от XSS (можно сохранять как есть, а при выводе экранировать)
+
+// Удаляем заявки старше 15 минут
+$pdo->exec("DELETE FROM orders WHERE created_at < NOW() - INTERVAL 15 MINUTE");
+
 // Вставляем данные через подготовленный запрос
-$stmt = $pdo->prepare("INSERT INTO orders (name, phone, sazhenec, type) VALUES (:name, :phone, :sazhenec, :type)");
+$stmt = $pdo->prepare("INSERT INTO orders (name, sazhenec, type) VALUES (:name, :sazhenec, :type)");
 $stmt->execute([
     ':name' => $name,
-    ':phone' => $phone,
     ':sazhenec' => $sazhenec,
     ':type' => $type
 ]);
