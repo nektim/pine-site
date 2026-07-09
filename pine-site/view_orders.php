@@ -15,6 +15,9 @@ try {
     die('Ошибка подключения к базе данных.');
 }
 
+// Удаляем заявки старше 15 минут
+$pdo->exec("DELETE FROM orders WHERE created_at < NOW() - INTERVAL 15 MINUTE");
+
 $stmt = $pdo->query("SELECT * FROM orders ORDER BY created_at DESC");
 $orders = $stmt->fetchAll();
 ?>
@@ -64,7 +67,6 @@ $orders = $stmt->fetchAll();
                     <tr>
                         <th>ID</th>
                         <th>Имя</th>
-                        <th>Телефон</th>
                         <th>Саженец</th>
                         <th>Тип</th>
                         <th>Дата</th>
@@ -75,7 +77,6 @@ $orders = $stmt->fetchAll();
                     <tr>
                         <td><?= htmlspecialchars($order['id']) ?></td>
                         <td><?= htmlspecialchars($order['name']) ?></td>
-                        <td><?= htmlspecialchars($order['phone']) ?></td>
                         <td><?= htmlspecialchars($order['sazhenec']) ?></td>
                         <td><?= htmlspecialchars($order['type']) ?></td>
                         <td><?= htmlspecialchars($order['created_at']) ?></td>
