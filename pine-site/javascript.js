@@ -111,12 +111,10 @@
   const modalSazenecInput = document.getElementById('modalSazenec');
   const closeOrderModalBtn = document.getElementById('closeModalBtn');
   const modalNameInput = document.getElementById('modalName');
-  const modalPhoneInput = document.getElementById('modalPhone');
 
   function openOrderModal(sazenName = '') {
     if (modalSazenecInput) modalSazenecInput.value = sazenName;
     if (modalNameInput) modalNameInput.value = '';
-    if (modalPhoneInput) modalPhoneInput.value = '';
     orderModal.classList.add('active');
   }
 
@@ -222,12 +220,12 @@
   if (sortSelect) sortSelect.addEventListener('change', filterAndSort);
 
   // --- Вспомогательная функция отправки формы через fetch ---
-  async function submitOrder(name, phone, sazhenec, type = 'обычная') {
+  async function submitOrder(name, sazhenec, type = 'обычная') {
       try {
           const response = await fetch('submit_order.php', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ name, phone, sazhenec, type })
+              body: JSON.stringify({ name, sazhenec, type })
           });
           const data = await response.json();
           if (data.success) {
@@ -252,15 +250,14 @@
       e.preventDefault();
       const form = e.target;
       const name = form.querySelector('input[placeholder="Имя и фамилия"]')?.value.trim();
-      const phone = form.querySelector('input[placeholder="Номер телефона"]')?.value.trim();
       const sazenec = form.querySelector('#sazenecInput')?.value.trim();
 
-      if (!name || !phone || !sazenec) {
+      if (!name || !sazenec) {
           alert('Пожалуйста, заполните все поля.');
           return;
       }
 
-      const result = await submitOrder(name, phone, sazenec, 'обычная');
+      const result = await submitOrder(name, sazenec, 'обычная');
       if (result.success) {
           form.reset();
           showSuccessModal();
@@ -274,15 +271,14 @@
       e.preventDefault();
       const form = e.target;
       const name = document.getElementById('modalName')?.value.trim();
-      const phone = document.getElementById('modalPhone')?.value.trim();
       const sazenec = document.getElementById('modalSazenec')?.value.trim();
 
-      if (!name || !phone || !sazhenec) {
+      if (!name || !sazenec) {
           alert('Пожалуйста, заполните все поля.');
           return;
       }
 
-      const result = await submitOrder(name, phone, sazenec, 'эксклюзивная');
+      const result = await submitOrder(name, sazenec, 'эксклюзивная');
       if (result.success) {
           form.reset();
           closeOrderModal();        // закрываем модалку заказа
